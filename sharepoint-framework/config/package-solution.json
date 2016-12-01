@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "name": "sharepoint-framework-client-side-solution",
+    "id": "5cd3e501-8497-4057-8d0f-267b67523ef6",
+    "version": "1.0.0.0"
+  },
+  "paths": {
+    "zippedPackage": "solution/sharepoint-framework.spapp"
+  }
+}

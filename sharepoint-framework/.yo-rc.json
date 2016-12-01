@@ -1,0 +1,7 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "libraryName": "sharepoint-framework",
+    "libraryId": "5cd3e501-8497-4057-8d0f-267b67523ef6",
+    "framework": "none"
+  }
+}
