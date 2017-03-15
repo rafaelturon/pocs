@@ -1,0 +1,26 @@
+listen ('127.0.0.1', 31415)
+('127.0.0.1', 40723) connected
+('127.0.0.1', 40723) --> 'POST / HTTP/1.1\r\nHost: localhost:31415\r\nConnection: keep-alive\r\nContent-Length: 72\r\nPostman-Token: 5dc6e236-3615-aead-1734-ad9d38495894\r\nCache-Control: no-cache\r\nOrigin: chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop\r\nUser-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.98 Safari/537.36\r\nContent-Type: application/json\r\nAccept: */*\r\nAccept-Encoding: gzip, deflate, br\r\nAccept-Language: pt-BR,pt;q=0.8,es;q=0.6,en-US;q=0.4,en;q=0.2\r\n\r\n{"jsonrpc": "2.0", "method": "echo", "params": ["hello world"], "id": 0}'
+('127.0.0.1', 40723) <-- '{"jsonrpc": "2.0", "error": {"code":-32700, "message": "Parse error.", "data": "No valid JSON. (Expecting value: line 1 column 1 (char 0))"}, "id": null}'
+('127.0.0.1', 40723) close
+('127.0.0.1', 40729) connected
+('127.0.0.1', 40729) --> 'POST / HTTP/1.1\r\nHost: 127.0.0.1:31415\r\nConnection: keep-alive\r\nContent-Length: 72\r\nPostman-Token: 72ce03e1-3c9c-e14a-383f-502c03477d99\r\nCache-Control: no-cache\r\nOrigin: chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop\r\nUser-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.98 Safari/537.36\r\nContent-Type: application/json\r\nAccept: */*\r\nAccept-Encoding: gzip, deflate, br\r\nAccept-Language: pt-BR,pt;q=0.8,es;q=0.6,en-US;q=0.4,en;q=0.2\r\n\r\n{"jsonrpc": "2.0", "method": "echo", "params": ["hello world"], "id": 0}'
+('127.0.0.1', 40729) <-- '{"jsonrpc": "2.0", "error": {"code":-32700, "message": "Parse error.", "data": "No valid JSON. (Expecting value: line 1 column 1 (char 0))"}, "id": null}'
+('127.0.0.1', 40729) close
+('127.0.0.1', 40733) connected
+('127.0.0.1', 40733) --> 'POST / HTTP/1.1\r\nHost: 127.0.0.1:31415\r\nConnection: keep-alive\r\nContent-Length: 72\r\nPostman-Token: e30417e1-dcb7-d119-362f-63a29fe95d67\r\nCache-Control: no-cache\r\nOrigin: chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop\r\nUser-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.98 Safari/537.36\r\nContent-Type: application/json\r\nAccept: */*\r\nAccept-Encoding: gzip, deflate, br\r\nAccept-Language: pt-BR,pt;q=0.8,es;q=0.6,en-US;q=0.4,en;q=0.2\r\n\r\n{"jsonrpc": "2.0", "method": "echo", "params": ["hello world"], "id": 0}'
+('127.0.0.1', 40733) <-- '{"jsonrpc": "2.0", "error": {"code":-32700, "message": "Parse error.", "data": "No valid JSON. (Expecting value: line 1 column 1 (char 0))"}, "id": null}'
+('127.0.0.1', 40733) close
+('127.0.0.1', 40738) connected
+('127.0.0.1', 40738) --> 'POST / HTTP/1.1\r\nHost: localhost:31415\r\nConnection: keep-alive\r\nContent-Length: 72\r\nPostman-Token: 7173a959-a3c4-9199-be0e-ba7fdaa5c507\r\nCache-Control: no-cache\r\nOrigin: chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop\r\nUser-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.98 Safari/537.36\r\nContent-Type: application/json\r\nAccept: */*\r\nAccept-Encoding: gzip, deflate, br\r\nAccept-Language: pt-BR,pt;q=0.8,es;q=0.6,en-US;q=0.4,en;q=0.2\r\n\r\n{"jsonrpc": "2.0", "method": "echo", "params": ["hello world"], "id": 1}'
+('127.0.0.1', 40738) <-- '{"jsonrpc": "2.0", "error": {"code":-32700, "message": "Parse error.", "data": "No valid JSON. (Expecting value: line 1 column 1 (char 0))"}, "id": null}'
+('127.0.0.1', 40738) close
+('127.0.0.1', 40745) connected
+('127.0.0.1', 40745) --> 'POST / HTTP/1.1\r\nHost: localhost:31415\r\nConnection: keep-alive\r\nContent-Length: 78\r\nPostman-Token: 1521de29-5a4c-6791-7737-e06a5213c462\r\nCache-Control: no-cache\r\nOrigin: chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop\r\nUser-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.98 Safari/537.36\r\nContent-Type: application/json\r\nAccept: */*\r\nAccept-Encoding: gzip, deflate, br\r\nAccept-Language: pt-BR,pt;q=0.8,es;q=0.6,en-US;q=0.4,en;q=0.2\r\n\r\n{\n\t"jsonrpc": "2.0",\n\t"method": "echo",\n\t"params": ["hello world"],\n\t"id": 1\n}'
+('127.0.0.1', 40745) <-- '{"jsonrpc": "2.0", "error": {"code":-32700, "message": "Parse error.", "data": "No valid JSON. (Expecting value: line 1 column 1 (char 0))"}, "id": null}'
+('127.0.0.1', 40745) close
+('127.0.0.1', 40769) connected
+('127.0.0.1', 40769) --> 'POST / HTTP/1.1\r\nHost: localhost:31415\r\nConnection: keep-alive\r\nContent-Length: 77\r\nPostman-Token: 796ea12f-18e0-4390-c14e-ef90d875e776\r\nCache-Control: no-cache\r\nOrigin: chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop\r\nUser-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.98 Safari/537.36\r\nContent-Type: application/json\r\nAccept: */*\r\nAccept-Encoding: gzip, deflate, br\r\nAccept-Language: pt-BR,pt;q=0.8,es;q=0.6,en-US;q=0.4,en;q=0.2\r\n\r\n{"jsonrpc": "2.0", "method": "echo", "params": {"message": "hello"}, "id": 0}'
+('127.0.0.1', 40769) <-- '{"jsonrpc": "2.0", "error": {"code":-32700, "message": "Parse error.", "data": "No valid JSON. (Expecting value: line 1 column 1 (char 0))"}, "id": null}'
+('127.0.0.1', 40769) close
+close ('127.0.0.1', 31415)
