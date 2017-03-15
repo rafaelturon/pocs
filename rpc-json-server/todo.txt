@@ -1,15 +1,15 @@
 RPC Call and Results
 - addPrinter
---> {"jsonrpc": "2.0", "method": "addPrinter", "params": {"printerUrl": "full-path", "installUrl": "full-path"}, "id": "XXX-YYY-ZZZ"}
-<-- {"jsonrpc": "2.0", "result": true, "id": "XXX-YYY-ZZZ"}
+--> {"jsonrpc": "2.0", "method": "addPrinter", "params": {"printerUrl": "full-path", "installUrl": "full-path"}, "id": "ADD-PRT-001"}
+<-- {"jsonrpc": "2.0", "result": true, "id": "ADD-PRT-001"}
 
 - listPrinters
---> {"jsonrpc": "2.0", "method": "listPrinters", "id": "XXX-YYY-ZZZ"}
-<-- {"jsonrpc": "2.0", "result": ["printer1", "printer2"], "id": "XXX-YYY-ZZZ"}
+--> {"jsonrpc": "2.0", "method": "listPrinters", "params": null "id": "LST-PRT-001"}
+<-- {"jsonrpc": "2.0", "result": ["printer1", "printer2"], "id": "LST-PRT-001"}
 
 - removePrinter
---> {"jsonrpc": "2.0", "method": "addPrinter", "params": {"printerName": "printer1"}, "id": "XXX-YYY-ZZZ"}
-<-- {"jsonrpc": "2.0", "result": true, "id": "XXX-YYY-ZZZ"}
+--> {"jsonrpc": "2.0", "method": "removePrinter", "params": {"printerUrl": "full-path", "installUrl": "full-path"}, "id": "REM-PRT-001"}
+<-- {"jsonrpc": "2.0", "result": true, "id": "REM-PRT-001"}
 
 Error
 - error object

@@ -32,20 +32,11 @@ records = {}
 def get_about(handler):
     return "RPC-Json 1.0.0.0"
 
-def get_record(handler):
-    key = urllib.unquote(handler.path[8:])
-    return records[key] if key in records else None
-
 def set_record(handler):
     key = urllib.unquote(handler.path[8:])
     payload = handler.get_payload()
     records[key] = payload
     return records[key]
-
-def delete_record(handler):
-    key = urllib.unquote(handler.path[8:])
-    del records[key]
-    return True # anything except None shows success
 
 def rest_call_json(url, payload=None, with_payload_method='POST'):
     'REST call with JSON decoding of the response and JSON payloads'
@@ -78,7 +69,7 @@ class RESTRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.printer = PrinterWrapper()
         self.routes = {
             r'^/about/': {'GET': get_about, 'media_type': 'application/json'},
-            r'^/record/': {'GET': get_record, 'POST': set_record, 'media_type': 'application/json'}}
+            r'^/record/': {'POST': set_record, 'media_type': 'application/json'}}
         
         return BaseHTTPServer.BaseHTTPRequestHandler.__init__(self, *args, **kwargs)
     
@@ -123,12 +114,16 @@ class RESTRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                         if 'media_type' in route:
                             self.send_header('Content-type', route['media_type'])
                         self.end_headers()
-                        if method == 'GET':
-                            result = self.get_response(self.printer.list_printers(), 'id-get')
-                            self.wfile.write(result)
-                        else:
-                            result = self.get_response(self.printer.remove_printer(content), 'id-remove')
-                            self.wfile.write(result)
+                        id = content['id']
+                        operation = content['method']
+                        params = content['params']
+                        if operation == 'addPrinter':
+                            result = self.get_response(self.printer.add_printer(params), id)
+                        elif operation == 'removePrinter':
+                            result = self.get_response(self.printer.remove_printer(params), id)
+                        elif operation == 'listPrinters':
+                            result = self.get_response(self.printer.list_printers(), id)
+                        self.wfile.write(result)
                     else:
                         self.send_response(404)
                         self.end_headers()
