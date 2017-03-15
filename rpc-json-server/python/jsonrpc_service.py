@@ -6,28 +6,20 @@ Simple and functional REST server for Python (2.7) using no dependencies beyond 
 Features:
 
 * Map URI patterns using regular expressions
-* Map any/all the HTTP VERBS (GET, PUT, DELETE, POST)
 * All responses and payloads are converted to/from JSON for you
-* Easily serve static files: a URI can be mapped to a file, in which case just GET is supported
-* You decide the media type (text/html, application/json, etc.)
 * Correct HTTP response codes and basic error messages
 * Simple REST client included! use the rest_call_json() method
 
 As an example, let's support a simple key/value store. To test from the command line using curl:
 
-curl "http://localhost:8080/records"
-curl -X PUT -d '{"name": "Tal"}' "http://localhost:8080/record/1"
-curl -X PUT -d '{"name": "Shiri"}' "http://localhost:8080/record/2"
-curl "http://localhost:8080/records"
-curl -X DELETE "http://localhost:8080/record/2"
-curl "http://localhost:8080/records"
-
-Create the file web/index.html if you'd like to test serving static files. It will be served from the root URI.
+curl "http://localhost:8080/record"
+curl -X POST -d '{"jsonrpc": "2.0", "method": "addPrinter", "params": {"printerUrl": "full-path", "installUrl": "full-path"}, "id": "XXX-YYY-ZZZ"}' "http://localhost:8080/record/"
 
 @author: Tal Liron (tliron @ github.com)
 '''
 
 import sys, os, re, shutil, json, urllib, urllib2, BaseHTTPServer
+from printer_wrapper import PrinterWrapper
 
 # Fix issues with decoding HTTP responses
 reload(sys)
@@ -39,9 +31,6 @@ records = {}
 
 def get_about(handler):
     return "RPC-Json 1.0.0.0"
-
-def get_records(handler):
-    return records
 
 def get_record(handler):
     key = urllib.unquote(handler.path[8:])
@@ -86,11 +75,10 @@ class MethodRequest(urllib2.Request):
 
 class RESTRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
+        self.printer = PrinterWrapper()
         self.routes = {
-            r'^/$': {'file': 'web/index.html', 'media_type': 'text/html'},
             r'^/about/': {'GET': get_about, 'media_type': 'application/json'},
-            r'^/records$': {'GET': get_records, 'media_type': 'application/json'},
-            r'^/record/': {'GET': get_record, 'POST': set_record, 'DELETE': delete_record, 'media_type': 'application/json'}}
+            r'^/record/': {'GET': get_record, 'POST': set_record, 'media_type': 'application/json'}}
         
         return BaseHTTPServer.BaseHTTPRequestHandler.__init__(self, *args, **kwargs)
     
@@ -128,46 +116,36 @@ class RESTRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                     self.send_header('Content-type', route['media_type'])
                 self.end_headers()
             else:
-                if 'file' in route:
-                    if method == 'GET':
-                        try:
-                            f = open(os.path.join(here, route['file']))
-                            try:
-                                self.send_response(200)
-                                if 'media_type' in route:
-                                    self.send_header('Content-type', route['media_type'])
-                                self.end_headers()
-                                shutil.copyfileobj(f, self.wfile)
-                            finally:
-                                f.close()
-                        except:
-                            self.send_response(404)
-                            self.end_headers()
-                            self.wfile.write('File not found\n')
-                    else:
-                        self.send_response(405)
+                if method in route:
+                    content = route[method](self)
+                    if content is not None:
+                        self.send_response(200)
+                        if 'media_type' in route:
+                            self.send_header('Content-type', route['media_type'])
                         self.end_headers()
-                        self.wfile.write('Only GET is supported\n')
-                else:
-                    if method in route:
-                        content = route[method](self)
-                        if content is not None:
-                            self.send_response(200)
-                            if 'media_type' in route:
-                                self.send_header('Content-type', route['media_type'])
-                            self.end_headers()
-                            if method != 'DELETE':
-                                self.wfile.write(json.dumps(content))
+                        if method == 'GET':
+                            result = self.get_response(self.printer.list_printers(), 'id-get')
+                            self.wfile.write(result)
                         else:
-                            self.send_response(404)
-                            self.end_headers()
-                            self.wfile.write('Not found\n')
+                            result = self.get_response(self.printer.remove_printer(content), 'id-remove')
+                            self.wfile.write(result)
                     else:
-                        self.send_response(405)
+                        self.send_response(404)
                         self.end_headers()
-                        self.wfile.write(method + ' is not supported\n')
+                        self.wfile.write('Not found\n')
+                else:
+                    self.send_response(405)
+                    self.end_headers()
+                    self.wfile.write(method + ' is not supported\n')
                     
     
+    def get_response(self, result, id):
+        data = {}
+        data['jsonrpc'] = '2.0'
+        data['result'] = result
+        data['id'] = id
+        return json.dumps(data)
+
     def get_route(self):
         for path, route in self.routes.iteritems():
             if re.match(path, self.path):
